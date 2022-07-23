@@ -1,0 +1,21 @@
+.modal {
+    height:100px;
+    width:200px;
+    background-color: yellow;
+
+}
+
+.wallet-option {
+    height:20px;
+    width:100%;
+    border: solid 1px black;
+    background-color: green;
+}
+
+.wallet-option:hover{
+    cursor: pointer;
+}
+
+.selected {
+    background-color: purple;
+}
