@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react'
 import Modal from './components/modal'
 import useModal from './hooks/useModal'
 
+import { Address } from "@emurgo/cardano-serialization-lib-asmjs"
+
+import { Buffer } from 'buffer'
+
 import './App.css';
 
 function App() {
@@ -52,15 +56,16 @@ function App() {
     try {
 
       const api = await cardano[selectedWallet].enable();
-  
-      const addr = (await api.getUnusedAddresses())[0];
 
-      console.log(addr);
-  
-      const sig = await api.signData(addr, searchParams.get('userid'));
-  
+      const addr_hex = (await api.getUnusedAddresses())[0];
+
+      const sig = await api.signData(addr_hex, searchParams.get('userid'));
+
       if (sig)
         console.log('Success! sig: ', sig)
+
+      const addr_bech = Address.from_bytes(Buffer.from(addr_hex, "hex")).to_bech32();
+
     } catch (e) {
       console.error('Error during sig', e);
       setSignError(true);
