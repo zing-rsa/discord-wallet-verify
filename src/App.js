@@ -56,7 +56,7 @@ function App() {
 
       const reward_addr = (await api.getRewardAddresses())[0];
 
-      const sig = await api.signData(rew_addr_hex, searchParams.get('userid'));
+      const sig = await api.signData(reward_addr, searchParams.get('data'));
       
       post(sig, reward_addr);
 
@@ -67,7 +67,7 @@ function App() {
 
   }
 
-  const post = (sig, reward_addr) => {
+  const post = async (sig, reward_addr) => {
 
     try {
       setPosting(true);
@@ -111,7 +111,7 @@ function App() {
   return (
     <div>
 
-      <div>Welcome {searchParams.get('name')}!</div>
+      <div>Welcome {searchParams.get('username')}!</div>
 
       <img src={`https://cdn.discordapp.com/avatars/${searchParams.get('userid')}/${searchParams.get('avatar')}.webp?size=100`} />
 
