@@ -76,7 +76,8 @@
     margin:5px;
 
     margin: 2.5px calc(50% - 72px);
-    display: block;
+    display: flex;
+    justify-content: center;
 
     border: none;
     border-radius: 3px;
@@ -93,6 +94,19 @@
 .wallet-option:hover{
     cursor: pointer;
     background-color: rgb(191, 233, 179);
+}
+
+.wallet-option-img {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    margin: 2.5px 2px;
+}
+
+.wallet-option-name {
+    /* line-height: 30px; */
+    margin-top:1px;
+    
 }
 
 .selected {

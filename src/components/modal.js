@@ -3,6 +3,12 @@ import React from 'react';
 import { toTitleCase } from '../util';
 import './modal.css'
 
+const walletImages = {
+    eternl: './eternl.png',
+    nami: './nami.png',
+    flint: './flint.png'
+}
+
 const Modal = ({ isShowing, hide, wallets, selectedWallet, setSelectedWallet, presentAuth }) => {
 
     return (
@@ -18,7 +24,8 @@ const Modal = ({ isShowing, hide, wallets, selectedWallet, setSelectedWallet, pr
 
                     {wallets && wallets.map((wallet, index) =>
                         <div key={index} className={`wallet-option ${wallet === selectedWallet ? 'selected' : ''}`} onClick={() => setSelectedWallet(wallet)}>
-                            {toTitleCase(wallet)}
+                            <img className='wallet-option-img' src={walletImages[wallet]}></img>
+                            <span className='wallet-option-name'>{toTitleCase(wallet)}</span>
                         </div>
                     )}
 

@@ -9,6 +9,7 @@ import useModal from './hooks/useModal'
 import { BACKEND_URI } from './config'
 import './App.css';
 
+
 function App() {
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -132,7 +133,7 @@ function App() {
           <>
             <div className='images'>
               <img src={`https://cdn.discordapp.com/avatars/${searchParams.get('buser')}/${searchParams.get('bavatar')}.webp?size=100`} alt='Bot avatar'/>
-              X
+              <i className="fa-solid fa-xl fa-xmark"></i>
               <img src={`https://cdn.discordapp.com/avatars/${searchParams.get('userid')}/${searchParams.get('avatar')}.webp?size=100`} alt='User avatar' />
             </div>
 
