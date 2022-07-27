@@ -1,31 +1,35 @@
-import ReactDOM from 'react-dom';
 import React from 'react';
+
+import { toTitleCase } from '../util';
 import './modal.css'
 
 const Modal = ({ isShowing, hide, wallets, selectedWallet, setSelectedWallet, presentAuth }) => {
 
     return (
         <>
-            {isShowing ? ReactDOM.createPortal(
-                <React.Fragment>
+            <div className={`modal ${isShowing ? 'visible' : ''}`}>
+                <div className='modal-header'>
+                    <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
+                        <i className="fa-solid fa-l fa-xmark"></i>
+                    </button>
+                </div>
 
-                    <div className='modal'>
-                        <button type="button" className="modal-close-button" data-dismiss="modal" aria-label="Close" onClick={hide}>
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <div className='options-container'>
 
-                        {wallets && wallets.map((wallet, index) =>
-                            <div key={index} className={`wallet-option ${wallet == selectedWallet ? 'selected' : '' }`} onClick={() => setSelectedWallet(wallet)}>
-                                {wallet}
-                            </div>
-                        )}
+                    {wallets && wallets.map((wallet, index) =>
+                        <div key={index} className={`wallet-option ${wallet === selectedWallet ? 'selected' : ''}`} onClick={() => setSelectedWallet(wallet)}>
+                            {toTitleCase(wallet)}
+                        </div>
+                    )}
 
-                        <button onClick={() => presentAuth()} disabled={!selectedWallet}>Authorize</button>
+                </div>
 
-                    </div>
-                </React.Fragment>, document.body
-            ) : null
-            }
+                <div className='modal-footer'>
+                    <button className='authorize' onClick={() => { hide(); presentAuth(); }} disabled={!selectedWallet}>Authorize</button>
+                </div>
+
+            </div>
+
         </>
     )
 }
