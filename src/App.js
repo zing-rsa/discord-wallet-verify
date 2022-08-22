@@ -22,7 +22,6 @@ function App() {
   const [signError, setSignError] = useState(false);
   const [signWaiting, setSignWaiting] = useState(false);
 
-  const [selectedWallet, setSelectedWallet] = useState(null);
   const [wallets, setWallets] = useState(null);
   const [cardano, setCardano] = useState(null);
 
@@ -67,12 +66,12 @@ function App() {
     setPosting(false);
   }, [searchParams]);
 
-  const presentAuth = useCallback(async () => {
+  const presentAuth = useCallback(async (wallet_index) => {
     setSignWaiting(true);
 
     try {
 
-      const api = await cardano[selectedWallet].enable();
+      const api = await cardano[wallets[wallet_index]].enable();
 
       const reward_addr = (await api.getRewardAddresses())[0];
 
@@ -87,10 +86,9 @@ function App() {
       setSignWaiting(false);
     }
 
-  }, [cardano, post, searchParams, selectedWallet]);
+  }, [cardano, post, searchParams, wallets]);
 
   const connect = useCallback(() => {
-    setSelectedWallet(null);
     toggle();
   }, [toggle]);
 
@@ -183,8 +181,6 @@ function App() {
                     isShowing={isShowing}
                     hide={toggle}
                     wallets={wallets}
-                    selectedWallet={selectedWallet}
-                    setSelectedWallet={setSelectedWallet}
                     presentAuth={presentAuth}
                   />
                 </div>

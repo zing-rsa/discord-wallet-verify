@@ -9,7 +9,7 @@ const walletImages = {
     flint: './flint.png'
 }
 
-const Modal = ({ isShowing, hide, wallets, selectedWallet, setSelectedWallet, presentAuth }) => {
+const Modal = ({ isShowing, hide, wallets, presentAuth }) => {
 
     return (
         <>
@@ -23,20 +23,14 @@ const Modal = ({ isShowing, hide, wallets, selectedWallet, setSelectedWallet, pr
                 <div className='options-container'>
 
                     {wallets && wallets.map((wallet, index) =>
-                        <div key={index} className={`wallet-option ${wallet === selectedWallet ? 'selected' : ''}`} onClick={() => setSelectedWallet(wallet)}>
+                        <div key={index} className='wallet-option' onClick={() => { hide(); presentAuth(index); } }>
                             <img className='wallet-option-img' src={walletImages[wallet]}></img>
                             <span className='wallet-option-name'>{toTitleCase(wallet)}</span>
                         </div>
                     )}
-
+                    
                 </div>
-
-                <div className='modal-footer'>
-                    <button className='authorize' onClick={() => { hide(); presentAuth(); }} disabled={!selectedWallet}>Authorize</button>
-                </div>
-
             </div>
-
         </>
     )
 }
